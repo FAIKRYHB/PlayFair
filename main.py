@@ -81,7 +81,7 @@ class pFair(QMainWindow, Ui_MainWindow):
     # Funkce pro šifrování dat zavolána po kliku na button
     def sifrovat(self):
         # Načtená vstupní data
-        vstup = self.input.text()
+        vstup = self.input.toPlainText()
         # Načtená tabulka s aktuálním klíčem
         table = self.GenTable(self.key.text())
         # Obsah této proměné se zobrazí
@@ -92,7 +92,7 @@ class pFair(QMainWindow, Ui_MainWindow):
         self.output.setText(result)
     def desifrovat(self):
         # Načtená vstupní data
-        vstup = self.input.text()
+        vstup = self.input.toPlainText()
         # Načtená tabulka s aktuálním klíčem
         table = self.GenTable(self.key.text())
         # Obsah této proměné se zobrazí
