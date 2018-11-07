@@ -23,7 +23,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Přepnout do CZ</string>
+    <string>Přepnout do EN</string>
    </property>
   </widget>
   <widget class="QPushButton" name="code">
@@ -103,7 +103,7 @@
     <rect>
      <x>340</x>
      <y>170</y>
-     <width>80</width>
+     <width>121</width>
      <height>17</height>
     </rect>
    </property>
@@ -116,7 +116,7 @@
     <rect>
      <x>340</x>
      <y>244</y>
-     <width>90</width>
+     <width>121</width>
      <height>17</height>
     </rect>
    </property>
@@ -129,7 +129,7 @@
     <rect>
      <x>340</x>
      <y>219</y>
-     <width>80</width>
+     <width>121</width>
      <height>17</height>
     </rect>
    </property>
@@ -142,7 +142,7 @@
     <rect>
      <x>340</x>
      <y>193</y>
-     <width>80</width>
+     <width>121</width>
      <height>17</height>
     </rect>
    </property>
@@ -155,7 +155,7 @@
     <rect>
      <x>340</x>
      <y>270</y>
-     <width>80</width>
+     <width>121</width>
      <height>17</height>
     </rect>
    </property>
@@ -176,7 +176,7 @@
     <string>Klíč</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="key">
    <property name="geometry">
     <rect>
      <x>10</x>
