@@ -43,8 +43,23 @@ class pFair():
             if (not(chr(65+j) in table)) and 65+j!=ord(lang):
                 table+=chr(65+j)
         return table
+instr=""
+table=""
+outstr=""
 
-
+for i in range(0,len(instr,2)):
+    for j in range(0,25):
+        if instr[i]==table[j]:
+            x=j
+    x=x%5
+    
+    y=(instr[i]/5)*5
+    
+    outstr+=table[x+y]
+    
+    x=instr[i]%5
+    y=(instr[i+1]/5)*5
+    outstr+=table[x+y]
 
 ####
 friedstring=pFair.Fry("ab.Cč d Eěf#GiÍJ  KL:&mnňoó pQrŘsšTťUúův wxYzž")
