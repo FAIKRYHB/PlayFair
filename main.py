@@ -22,28 +22,51 @@ class pFair(QMainWindow, Ui_MainWindow):
         for i in range(0,len(instr)):
             if instr[i]<"A" or instr[i]>"Z":
                 if instr[i]==" ":
+                    if len(outstr)!=0:
+                        if outstr[-1]=="M":
+                            outstr+="X"
                     outstr+="MEZERA"
                 else:
                     if instr[i]==chr(ord(self.lang)+32):
                         if self.lang=="W":
+                            if len(outstr)!=0:
+                                if outstr[-1]=="V":
+                                    outstr+="X"
                             outstr+="V"
                         if self.lang=="J":
+                            if len(outstr)!=0:
+                                if outstr[-1]=="I":
+                                    outstr+="X"
                             outstr+="I"
                     else:
                         for j in range(0, len(reple)):
                             if instr[i] in reple[j]:
-                                #print(forThing[j])
+                                if len(outstr)!=0:
+                                    if outstr[-1]==forThing[j]:
+                                        outstr+="X"
                                 outstr+=forThing[j]
             else:
                 if instr[i]==self.lang:
                     if self.lang=="W":
+                        if len(outstr)!=0:
+                                if outstr[-1]=="V":
+                                    outstr+="X"
                         outstr+="V"
                     if self.lang=="J":
+                        if len(outstr)!=0:
+                                if outstr[-1]=="I":
+                                    outstr+="X"
                         outstr+="I"
                 else:
+                    if len(outstr)!=0:
+                                if outstr[-1]==instr[i]:
+                                    outstr+="X"
                     outstr+=instr[i]
         if (len(outstr)%2)==1:
-            outstr+="X"
+            if outstr[-1]=="X":
+                outstr+="W"
+            else:
+                outstr+="X"
         return outstr
 
     def GenTable(self,key):
@@ -104,22 +127,42 @@ class pFair(QMainWindow, Ui_MainWindow):
                     print(table[j])
                     prvni=j
                     break
-            
-            y=(int(prvni/5))*5
-            outstr+=table[x+y]
-            print(table[x+y])
-            for j in range(0,25):
-                if instr[i]==table[j]:
-                    prvni=j
-                    break
-            x=prvni%5
-            for j in range(0,25):
-                if instr[i+1]==table[j]:
-                    druhe=j
-                    break
-            y=(int(druhe/5))*5
-            outstr+=table[x+y]
-            print(table[x+y])
+            if (int(prvni/5))==(int(druhe/5)):
+                if (int(prvni/5))==(int((prvni+1)/5)):
+                    outstr+=table[prvni+1]
+                else:
+                    outstr+=table[prvni-4]
+                if (int(druhe/5))==(int((druhe+1)/5)):
+                    outstr+=table[druhe+1]
+                else:
+                    outstr+=table[druhe-4]
+            else:
+                if prvni%5==druhe%5:
+                    if prvni+5>24:
+                        outstr+=table[prvni%5]
+                    else:
+                        outstr+=table[prvni+5]
+                    if druhe+5>24:
+                        outstr+=table[druhe%5]
+                    else:
+                        outstr+=table[druhe+5]
+                else:
+                    y=(int(prvni/5))*5
+                    outstr+=table[x+y]
+                    print(table[x+y])
+                    
+                    for j in range(0,25):
+                        if instr[i]==table[j]:
+                            prvni=j
+                            break
+                    x=prvni%5
+                    for j in range(0,25):
+                        if instr[i+1]==table[j]:
+                            druhe=j
+                            break
+                    y=(int(druhe/5))*5
+                    outstr+=table[x+y]
+                    print(table[x+y])
 
         self.output.setText(outstr)
 
@@ -137,26 +180,51 @@ class pFair(QMainWindow, Ui_MainWindow):
         for i in range(0,len(instr),2):
             for j in range(0,25):
                 if instr[i+1]==table[j]:
-                    druhe=j+1
+                    print(table[j])
+                    druhe=j
                     break
             x=druhe%5
             for j in range(0,25):
                 if instr[i]==table[j]:
-                    prvni=j+1
+                    print(table[j])
+                    prvni=j
                     break
-            y=(int(prvni/5))*5
-            outstr+=table[x+y]
-            for j in range(0,25):
-                if instr[i]==table[j]:
-                    prvni=j+1
-                    break
-            x=prvni%5
-            for j in range(0,25):
-                if instr[i]==table[j]:
-                    druhe=j+1
-                    break
-            y=(int(druhe/5))*5
-            outstr+=table[x+y]
+            if (int(prvni/5))==(int(druhe/5)):
+                if (int(prvni/5))==(int((prvni-1)/5)):
+                    outstr+=table[prvni-1]
+                else:
+                    outstr+=table[prvni+4]
+                if (int(druhe/5))==(int((druhe-1)/5)):
+                    outstr+=table[druhe-1]
+                else:
+                    outstr+=table[druhe+4]
+            else:
+                if prvni%5==druhe%5:
+                    if prvni-5<0:
+                        outstr+=table[24-prvni-5]
+                    else:
+                        outstr+=table[prvni-5]
+                    if druhe-5<0:
+                        outstr+=table[24-druhe-5]
+                    else:
+                        outstr+=table[druhe-5]
+                else:
+                    y=(int(prvni/5))*5
+                    outstr+=table[x+y]
+                    print(table[x+y])
+                    
+                    for j in range(0,25):
+                        if instr[i]==table[j]:
+                            prvni=j
+                            break
+                    x=prvni%5
+                    for j in range(0,25):
+                        if instr[i+1]==table[j]:
+                            druhe=j
+                            break
+                    y=(int(druhe/5))*5
+                    outstr+=table[x+y]
+                    print(table[x+y])
             
         self.output.setText(outstr)
     def __init__(self):
