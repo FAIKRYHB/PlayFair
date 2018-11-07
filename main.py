@@ -57,25 +57,6 @@ class pFair(QMainWindow, Ui_MainWindow):
             if (not(chr(65+j) in table)) and 65+j!=ord(self.lang):
                 table+=chr(65+j)
         return table
-<<<<<<< HEAD
-instr=""
-table=""
-outstr=""
-
-for i in range(0,len(instr,2)):
-    for j in range(0,25):
-        if instr[i]==table[j]:
-            x=j
-    x=x%5
-    
-    y=(instr[i]/5)*5
-    
-    outstr+=table[x+y]
-    
-    x=instr[i]%5
-    y=(instr[i+1]/5)*5
-    outstr+=table[x+y]
-=======
     
     def ChangeTable(self):
         table = self.GenTable(self.key.text())
@@ -100,26 +81,84 @@ for i in range(0,len(instr,2)):
     # Funkce pro šifrování dat zavolána po kliku na button
     def sifrovat(self):
         # Načtená vstupní data
-        vstup = self.input.toPlainText()
+        instr = self.input.toPlainText()
+        instr = self.Fry(instr)
+        print(instr)
         # Načtená tabulka s aktuálním klíčem
         table = self.GenTable(self.key.text())
         # Obsah této proměné se zobrazí
-        result = ""
+        outstr = ""
         
         ## Sem příjde dané šifrování
-        
-        self.output.setText(result)
+        prvni=0
+        druhe=0
+        for i in range(0,len(instr),2):
+            for j in range(0,25):
+                if instr[i+1]==table[j]:
+                    print(table[j])
+                    druhe=j
+                    break
+            x=druhe%5
+            for j in range(0,25):
+                if instr[i]==table[j]:
+                    print(table[j])
+                    prvni=j
+                    break
+            
+            y=(int(prvni/5))*5
+            outstr+=table[x+y]
+            print(table[x+y])
+            for j in range(0,25):
+                if instr[i]==table[j]:
+                    prvni=j
+                    break
+            x=prvni%5
+            for j in range(0,25):
+                if instr[i+1]==table[j]:
+                    druhe=j
+                    break
+            y=(int(druhe/5))*5
+            outstr+=table[x+y]
+            print(table[x+y])
+
+        self.output.setText(outstr)
+
     def desifrovat(self):
         # Načtená vstupní data
-        vstup = self.input.toPlainText()
+        instr = self.input.toPlainText()
         # Načtená tabulka s aktuálním klíčem
         table = self.GenTable(self.key.text())
         # Obsah této proměné se zobrazí
-        result = ""
+        outstr = ""
         
         ## Sem příjde dané dešifrování
-        
-        self.output.setText(result)
+        prvni=0
+        druhe=0
+        for i in range(0,len(instr),2):
+            for j in range(0,25):
+                if instr[i+1]==table[j]:
+                    druhe=j+1
+                    break
+            x=druhe%5
+            for j in range(0,25):
+                if instr[i]==table[j]:
+                    prvni=j+1
+                    break
+            y=(int(prvni/5))*5
+            outstr+=table[x+y]
+            for j in range(0,25):
+                if instr[i]==table[j]:
+                    prvni=j+1
+                    break
+            x=prvni%5
+            for j in range(0,25):
+                if instr[i]==table[j]:
+                    druhe=j+1
+                    break
+            y=(int(druhe/5))*5
+            outstr+=table[x+y]
+            
+        self.output.setText(outstr)
     def __init__(self):
         QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
@@ -138,10 +177,3 @@ if __name__ == "__main__":
     window = pFair()
     window.show()
     sys.exit(app.exec_())
-
->>>>>>> 8e9a3aa18a9fded427fca0238761f92e95dc0c13
-
-####
-friedstring=pFair.Fry("ab.Cč d Eěf#GiÍJ  KL:&mnňoó pQrŘsšTťUúův wxYzž")
-table=pFair.GenTable("BANANOVNIK")
-#key="BANANOVNIK" #banovik
