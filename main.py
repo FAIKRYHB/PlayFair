@@ -9,7 +9,7 @@ for i in range(0,len(rawinstring)):
         if rawinstring[i]==" ":
             friedinstring+="MEZERA"
         else:
-            if rawinstring[i]==chr(lang+32):
+            if rawinstring[i]==chr(ord(lang)+32):
                 if lang=="w":
                     friedinstring+="V"
                 if lang=="j":
@@ -28,17 +28,13 @@ for i in range(0,len(rawinstring)):
         else:
             friedinstring+=rawinstring[i]
         
-key="bananovnik" #baovik
+key="BANANOVNIK" #banovik
 table=""
-i=0
+            
+for i in range(0,len(key)):
+    if not(key[i] in table):
+        table+=key[i]
 
-while i < 25:
-    if i>=len(key):
-        for j in range(0,25):
-            if not(65+j in table):
-                table+=chr(65+j)
-                i+=1
-    else:
-        if not(key[i] in table):
-            table+=key[i]
-            i+=1
+for j in range(0,26):
+    if (not(chr(65+j) in table)) and 65+j!=ord(lang):
+        table+=chr(65+j)
