@@ -1,32 +1,35 @@
 rawinstring="ab.Cč d Eěf#GiÍJ  KL:&mnňoó pQrŘsšTťUúův wxYzž"
-friedinstring=""
 reple = [["a","á","ä","Á","Ä"],["b"],["č","ć","c","Č","Ć"],["d","ď","Ď"],["ě","é","e","ë","Ě","É","Ë"],["f"],["g"],["h"],["i","í","ï","Í","Ï"],["j"],["k"],["l","ĺ","Ĺ"],["m"],["n","ň","ń","Ň","Ń"],["o","ó","ö","Ó","Ö"],["p"],["q"],["r","ř","ŕ","Ř","Ŕ"],["š","ś","s","Š","Ś"],["t","ť","Ť"],["u","ú","ů","Ů","Ú"],["v"],["w"],["x"],["y","ý","ÿ","Ý","Ÿ"],["z","ž","ź","Ž","Ź"]]
 forThing = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
 lang="W"
 
-for i in range(0,len(rawinstring)):
-    if rawinstring[i]<"A" or rawinstring[i]>"Z":
-        if rawinstring[i]==" ":
-            friedinstring+="MEZERA"
-        else:
-            if rawinstring[i]==chr(ord(lang)+32):
-                if lang=="w":
-                    friedinstring+="V"
-                if lang=="j":
-                    friedinstring+="I"
+class pFair():
+    def Fry(self,instr):
+        outstr=""
+        for i in range(0,len(instr)):
+            if instr[i]<"A" or instr[i]>"Z":
+                if instr[i]==" ":
+                    outstr+="MEZERA"
+                else:
+                    if instr[i]==chr(ord(lang)+32):
+                        if lang=="w":
+                            outstr+="V"
+                        if lang=="j":
+                            outstr+="I"
+                    else:
+                        for j in range(0, len(reple)):
+                            if instr[i] in reple[j]:
+                                #print(forThing[j])
+                                outstr+=forThing[j]
             else:
-                for j in range(0, len(reple)):
-                    if rawinstring[i] in reple[j]:
-                        #print(forThing[j])
-                        friedinstring+=forThing[j]
-    else:
-        if rawinstring[i]==lang:
-            if lang=="W":
-                friedinstring+="V"
-            if lang=="J":
-                friedinstring+="I"
-        else:
-            friedinstring+=rawinstring[i]
+                if instr[i]==lang:
+                    if lang=="W":
+                        outstr+="V"
+                    if lang=="J":
+                        outstr+="I"
+                else:
+                    outstr+=instr[i]
+        return outstr
         
 key="BANANOVNIK" #banovik
 table=""
